@@ -163,7 +163,7 @@ having no_of_orders > 1 and no_of_orders = promo_code_orders
 ---
 
 
-7. What percent of customers were organically acquired in Jan 2025? (Placed first order without promo code)
+7. What percent of customers were organically acquired in Jan 2025? (Placed their first order without using a promo code)
 ```
 with cte as (SELECT Customer_code, MIN(Placed_at) AS first_order_date
 FROM orders
