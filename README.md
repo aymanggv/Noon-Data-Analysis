@@ -70,6 +70,7 @@ from cte
 where rn = 1;
 ```
 
+---
 
 2. How many new customers is Noon acquiring daily since their launch data?
 ```
