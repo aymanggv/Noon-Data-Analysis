@@ -5,7 +5,7 @@ This project contains SQL-based analysis on a simulated Noon e-commerce orders d
 ---
 
 ## 🗂️ Project Structure
-
+```
 noon-orders-sql-analysis/
 │
 ├── sql/
@@ -13,7 +13,7 @@ noon-orders-sql-analysis/
 │   └── noon_orders_analysis.sql           # SQL queries for analysis
 │
 ├── README.md                              # Project overview
-
+```
 ---
 
 ## 🛠️ Tech Stack
