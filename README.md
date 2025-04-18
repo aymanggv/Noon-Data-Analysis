@@ -53,8 +53,10 @@ The SQL queries provide insights such as:
 ---
 
 ## SQL Queries
-Find top outlet by cuisine type without using limit and top function. (Can be modified to list top 3 outlets)
+1. Find the top outlet by cuisine type without using limit and top function.
 ```
+(Below can be modified to list top 3 outlets)
+
 with cte as(
 select Cuisine, Restaurant_id, count(*) as no_of_orders 
 from orders
@@ -67,3 +69,23 @@ from cte
 ) as a -- need to put an alias after every subquery
 where rn = 1;
 ```
+
+
+2. How many new customers is Noon acquiring daily since their launch data?
+```
+(Below can also be solved using row number.)
+
+with cte as (
+select Customer_code, cast(min(Placed_at) as date) as first_order_date
+from orders
+group by Customer_code
+)
+select first_order_date, count(*) as no_of_new_customers
+from cte
+group by first_order_date
+order by first_order_date
+;
+```
+
+3. 
+
