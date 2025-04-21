@@ -54,7 +54,7 @@ The SQL queries provide insights such as:
 
 ## SQL Queries
 1. Find the top outlet by cuisine type without using limit and top function.
-```
+```sql
 (Below can be modified to list top 3 outlets)
 
 with cte as(
@@ -73,7 +73,7 @@ where rn = 1;
 ---
 
 2. How many new customers is Noon acquiring daily since their launch data?
-```
+```sql
 (Below can also be solved using row number.)
 
 with cte as (
@@ -91,7 +91,7 @@ order by first_order_date
 ---
 
 3. List  all the users who were acquired in Jan 2025 who only placed 1 order in Jan and did not place any other order since.
-```
+```sql
 WITH cte AS (
   SELECT Customer_code, MIN(Placed_at) AS first_order_date, MAX(Placed_at) as last_order_date, count(*) as count_of_orders
   FROM orders
@@ -121,7 +121,7 @@ order by Customer_code
 ---
 
 4. List all the customers who haven't placed an order in the last 7 days but were acquired one month ago who placed their first order on promo.
-```
+```sql
 with cte as
  (SELECT Customer_code, MIN(Placed_at) AS first_order_date, MAX(Placed_at) as last_order_date
   FROM orders
@@ -138,7 +138,7 @@ where Promo_code_Name is not null AND last_order_date < (current_date() - INTERV
 ---
 
 5. The growth team is plnning to create a trigger that will target customers after their every 3rd order with a personalized message. Create a query to find those customers.
-```
+```sql
 with cte as (select Customer_code, order_id, row_number() over (partition by Customer_code order by order_id) as rn
 from orders
 group by Customer_code, order_id
@@ -152,7 +152,7 @@ where rn % 3 = 0 -- add an "and current date = today" code as well so that the t
 
 
 6. List all the customers who placed more than 1 order and all their orders were placed using a promo only.
-```
+```sql
 select Customer_code, count(*) as no_of_orders, count(Promo_code_Name) as promo_code_orders
 from orders
 group by Customer_code
@@ -164,7 +164,7 @@ having no_of_orders > 1 and no_of_orders = promo_code_orders
 
 
 7. What percent of customers were organically acquired in Jan 2025? (Placed their first order without using a promo code)
-```
+```sql
 with cte as (SELECT Customer_code, MIN(Placed_at) AS first_order_date
 FROM orders
 where Month(Placed_at) = 1
